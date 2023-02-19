@@ -2,8 +2,8 @@
 
 Spring Boot
 
--Spring Boot Actuator
--Spring Web
+-Spring Boot Actuator\n
+-Spring Web\n
 -Spring Data JPA
 -Rest Repositories
 -Rest Repositories HAL Explorer
