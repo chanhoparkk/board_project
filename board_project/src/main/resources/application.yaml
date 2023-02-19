@@ -1,0 +1,60 @@
+debug: false
+management.endpoints.web.exposure.include: "*"
+logging:
+  level:
+    com.example.board_project: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: cksghek1661!
+  jpa:
+    defer-datasource-initialization:  true
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+      database: mysql
+    hibernate:
+      ddl-auto: create
+  sql:
+    init:
+      mode: always
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: annotated
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+  thymeleaf3:
+    decoupled-logic: true
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: f02a24e81276f75fc8bd11d35200367c
+            client-secret: aEjvMDA08LyxFW76yBXTxV6Bt0O3qIAH
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            client-authentication-method: POST
+            client-name: Kakao
+
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+
+---
+spring:
+  config.activate.on-profile: test
+  datasource.url: jdbc:mysql://localhost:3306/board
